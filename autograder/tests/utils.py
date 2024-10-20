@@ -63,8 +63,7 @@ class ProcessRunner():
         # Kill processes
         runner1.process.kill()
         runner2.process.kill()
-        runner1.process.wait()
-        runner2.process.wait()
+        time.sleep(0.1)
 
         # Close files
         runner1.stderr_file.close()
