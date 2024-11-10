@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=
+CFLAGS=-s
 
 all: clean build
 
@@ -15,5 +15,5 @@ clean:
 zip: clean
 	rm -f project.zip
 	mkdir -p project
-	cp server.c client.c Makefile project
+	cp server.c client.c transport.c io.c transport.h io.h consts.h Makefile project
 	zip project1.zip project/*

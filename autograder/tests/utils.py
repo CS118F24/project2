@@ -101,16 +101,19 @@ def proxy(client_port, server_port, loss_rate, reorder_rate):
 
     last_flush = int(time.time() * 1000)
 
+    count1 = 0
+    count2 = 0
     while True:
         try:
             data, c_addr = c.recvfrom(4096)
             if len(data) > 2000 or len(data) <= 0:
                 continue
 
-            if random.random() > loss_rate:
-                if random.random() > reorder_rate:
+            if random.random() > loss_rate or count1 < 3:
+                if random.random() > reorder_rate or count1 < 3:
                     # send immediately
                     s.sendto(data, ('localhost', server_port))
+                    count1 += 1
                 else:
                     # store in buffer
                     cli_serv_buffer.append(data)
@@ -123,10 +126,11 @@ def proxy(client_port, server_port, loss_rate, reorder_rate):
             data, _ = s.recvfrom(4096)
             if len(data) > 2000 or len(data) <= 0:
                 continue
-            if random.random() > loss_rate:
+            if random.random() > loss_rate or count2 < 3:
                 if c_addr:
-                    if random.random() > reorder_rate:
+                    if random.random() > reorder_rate or count2 < 3:
                         c.sendto(data, c_addr)
+                        count2 += 1
                     else:
                         serv_cli_buffer.append(data)
                 else:
