@@ -15,3 +15,4 @@ COPY --from=build2 /src /autograder/source/src
 COPY autograder/run_autograder /autograder
 COPY autograder /autograder/source
 RUN pip install -r /autograder/source/requirements.txt
+COPY keys /autograder/source/keys

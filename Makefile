@@ -1,6 +1,6 @@
 # NOTE: Make sure you have your project files in the ./project directory
 # Will run the autograder and place the results in ./results/results.json
-IMAGE=reliability-is-essential
+IMAGE=security-is-key
 
 run:
 	docker run --rm \
