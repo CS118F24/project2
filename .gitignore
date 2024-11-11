@@ -11,3 +11,5 @@ project
 venv
 results
 __pycache__
+*.bin
+gen_cert

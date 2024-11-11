@@ -1,6 +1,6 @@
 #include "consts.h"
+#include "sec.h"
 #include "transport.h"
-#include "io.h"
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,8 +44,8 @@ int main(int argc, char** argv) {
             break;
     }
 
-    init_io();
-    listen_loop(sockfd, &client_addr, SERVER_AWAIT, input_io, output_io);
+    init_sec(SERVER_CLIENT_HELLO_AWAIT, argc > 2);
+    listen_loop(sockfd, &client_addr, SERVER_AWAIT, input_sec, output_sec);
 
     return 0;
 }

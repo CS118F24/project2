@@ -1,5 +1,5 @@
 #include "consts.h"
-#include "io.h"
+#include "sec.h"
 #include "transport.h"
 #include <arpa/inet.h>
 #include <stdio.h>
@@ -28,8 +28,8 @@ int main(int argc, char** argv) {
     int PORT = atoi(argv[2]);
     server_addr.sin_port = htons(PORT); // Big endian
 
-    init_io();
-    listen_loop(sockfd, &server_addr, CLIENT_START, input_io, output_io);
+    init_sec(CLIENT_CLIENT_HELLO_SEND, argc > 3);
+    listen_loop(sockfd, &server_addr, CLIENT_START, input_sec, output_sec);
 
     return 0;
 }
