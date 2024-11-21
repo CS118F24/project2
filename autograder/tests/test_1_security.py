@@ -121,6 +121,13 @@ class TestSecurity(unittest.TestCase):
             if client_output:
                 client_stdout += client_output
 
+        if server_runner.process is not None and client_runner.process is not None:
+            server_runner.process.kill()
+            client_runner.process.kill()
+        s.close()
+        c.close()
+
+
         return (server_packets, client_packets, (server_stdout, client_stdout, file))
 
     @partial_credit(5)
